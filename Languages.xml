@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings>
+
+	<language id="com.bluestrike2.stylus">
+		<root-zone>language-root.stylus</root-zone>
+		<name>Stylus</name>
+		<detectors>
+			<extension>styl</extension>
+		</detectors>
+		<default-extension>styl</default-extension>
+	</language>
+	
+	<meta>
+		<name>Stylus Sugar</name>
+		<author>Tom Stoecklein</author>
+		<download format="git">git://github.com/bluestrike2/Stylus.sugar.git</download>
+		<url>http://github.com/bluestrike2/Stylus.sugar</url>
+	</meta>
+	
+</settings>

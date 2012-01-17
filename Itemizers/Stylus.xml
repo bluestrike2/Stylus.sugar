@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<itemizer>
+    <recipe name="stylus.selector">
+        <class>ESStyleItem</class>
+        <selector>selector.stylus:capture(name)</selector>
+    </recipe>
+    <recipe name="stylus.comment">
+        <class>ESCommentItem</class>
+        <selector>stylus comment</selector>
+    </recipe>
+</itemizer> 

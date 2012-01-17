@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+<syntax name="language-root.stylus">
+  <zones>
+    <zone name="itemize.group-start.comment.block.stylus">
+    	<starts-with>//\s*@group\s</starts-with>
+    	<ends-with>$</ends-with>
+    	 <subzones>
+    		<cut-off>$</cut-off>
+    		<zone name="name">
+    			<expression>.*</expression>
+    		</zone>
+    	</subzones>
+    </zone>
+    <zone name="itemize.group-end.comment.block.stylus">
+    	<expression>//\s*@end(?:\s+.*|\s*)</expression>
+    </zone>
+    <include collection="comments" />
+    <include collection="variables"/> 
+    <include collection="keywords"/>
+    <include collection="selectors"/>
+    <include collection="properties"/>
+    <include collection="property-values"/>
+    <include collection="string.single"/>
+    <include collection="string.double"/>
+  </zones>
+
+  <library>
+    <collection name="variables">
+      <zone name="at.variable.stylus">
+        <starts-with>@([-\w]+)</starts-with>
+        <ends-with>$</ends-with>
+        <subzones>
+          <cut-off>$</cut-off>
+          <zone name="parameter">
+          	<expression>.*</expression>
+          </zone>
+        </subzones>
+      </zone>
+      <zone name="dollarbill.variable.stylus">
+        <starts-with>\$([-\w]+)</starts-with>
+        <ends-with>$</ends-with>
+        <subzones>
+          <cut-off>$</cut-off>
+          <zone name="parameter">
+          	<expression>.*</expression>
+          </zone>
+        </subzones>
+      </zone>
+    </collection>
+    <collection name="keywords">
+      <!-- in textmate bundle but not sure of purpose
+        <zone name="keyword">
+          <expression>^ *(&amp;|)</expression>
+        </zone> -->
+      <zone name="keyword.controls">
+        <expression>\b(!important|for|in|return|true|false|null|if|else|unless|return)\b</expression>
+      </zone>
+      <zone name="keyword.operators">
+        <!-- removed escaped forward whack to avoid overriding comment behavior --> 
+        <expression>((?:!|~|\+|-|(?:\*)?\*|%|(?:\.)\.\.|&lt;|&gt;|(?:=|:|\?|\+|-|\*|%|&lt;|&gt;)?=|!=)|(?:in|is(?:nt)?|not)\b)</expression>
+      </zone>
+    </collection>
+    <collection name="comments">
+      <zone name="comment.line">
+        <starts-with>
+          <expression>//</expression>
+          <capture number="0" name="punctuation.definition.begin"/>
+        </starts-with>
+        <ends-with>$</ends-with>
+      </zone>
+      <zone name="comment.block">
+      	<starts-with>
+      		<expression>/\*</expression>
+      		<capture number="0" name="punctuation.definition.begin"/>
+      	</starts-with>
+      	<ends-with>
+      		<expression>\*/</expression>
+      		<capture number="0" name="punctuation.definition.end"/>
+      	</ends-with>
+      </zone>
+      <zone name="comment.block.buffered">
+      	<starts-with>
+      		<expression>/\*!</expression>
+      		<capture number="0" name="punctuation.definition.begin"/>
+      	</starts-with>
+      	<ends-with>
+      		<expression>\*/</expression>
+      		<capture number="0" name="punctuation.definition.end"/>
+      	</ends-with>
+      </zone>
+    </collection>
+    <collection name="selectors">
+      <zone name="selector.stylus">
+        <starts-with>
+          <expression>(^|\s{2,})(\.|\#|\b(a|abbr|acronym|address|area|article|aside|audio|b|base|big|blockquote|body|br|button|canvas|caption|cite|code|col|colgroup|datalist|dd|del|details|dfn|dialog|div|dl|dt|em|eventsource|fieldset|figure|figcaption|footer|form|frame|frameset|(h[1-6])|head|header|hgroup|hr|html|i|iframe|img|input|ins|kbd|label|legend|li|link|map|mark|menu|meta|meter|nav|noframes|noscript|object|ol|optgroup|option|output|p|param|pre|progress|q|samp|script|section|select|small|span|strike|strong|style|sub|summary|sup|table|tbody|td|textarea|tfoot|th|thead|time|title|tr|tt|ul|var|video)\b)</expression>
+        </starts-with>
+        <ends-with>
+          <expression>$</expression>
+        </ends-with>
+        <subzones>
+          <include collection="selector-miscellania" />
+        </subzones>
+      </zone>
+      <zone name="selector.parentreference.stylus">
+        <starts-with>
+          <expression>(^|\s*)&amp;(?=[:.*#a-zA-Z@\\])</expression>
+        </starts-with>
+        <ends-with>
+          <expression>$</expression>
+        </ends-with>
+        <subzones>
+          <include collection="selector-miscellania" />
+        </subzones>
+      </zone>
+    </collection>
+       
+    <collection name="properties">
+      <zone name="property-name">
+        <expression>(?&lt;=^|\{|;)\s*(azimuth|background-attachment|background-clip|background-color|background-image|background-position|background-repeat|background|box-shadow|box-sizing|border(-collapse|-color|-width|((-bottom|-top)(-left|-right))?-radius|-spacing|-style|-image(-outset|-repeat|-slice|-source|-width)?|(-bottom|-left|-right|-top)(-color|-style|-width)?)?|bottom|caption-side|clear|clip|color|content|counter-increment|counter-reset|cue-after|cue-before|cue|cursor|direction|display|elevation|empty-cells|float|font-family|font-size-adjust|font-size|font-stretch|font-style|font-variant|font-weight|font|height|image-rendering|left|letter-spacing|line-height|list-style-image|list-style-position|list-style-type|list-style|margin-bottom|margin-left|margin-right|margin-top|marker-offset|margin|marks|max-height|max-width|min-height|min-width|opacity|orphans|outline-color|outline-style|outline-width|outline|(text-)?overflow(-[xy])?|padding-bottom|padding-left|padding-right|padding-top|padding|page-break-after|page-break-before|page-break-inside|page|pause-after|pause-before|pause|pitch-range|pitch|play-during|pointer-events|position|quotes|resize|richness|right|size|speak-header|speak-numeral|speak-punctuation|speech-rate|speak|src|stress|table-layout|text-(align|decoration|indent|rendering|shadow|transform)|top|transition|transform|unicode-bidi|vertical-align|visibility|voice-family|volume|white-space|widows|width|word-(spacing|wrap)|zoom|z-index)</expression>
+      </zone>
+      <zone name="property-name.mixin">
+        <expression>(.+)\S\(.*\)$</expression>
+      </zone>
+    </collection>
+    
+    <collection name="property-values">
+      <zone name="property-value.constant">
+        <expression>\b(absolute|all(-scroll)?|always|armenian|auto|avoid|baseline|below|bidi-override|block|bold|bolder|border-box|both|bottom|break-all|break-word|capitalize|center|char|circle|cjk-ideographic|col-resize|collapse|content-box|crosshair|dashed|decimal-leading-zero|decimal|default|disabled|disc|distribute-all-lines|distribute-letter|distribute-space|distribute|dotted|double|e-resize|ellipsis|fixed|geometricPrecision|georgian|groove|hand|hebrew|help|hidden|hiragana-iroha|hiragana|horizontal|ideograph-alpha|ideograph-numeric|ideograph-parenthesis|ideograph-space|inactive|inherit|inline-block|inline|inset|inside|inter-ideograph|inter-word|italic|justify|katakana-iroha|katakana|keep-all|left|lighter|line-edge|line-through|line|list-item|loose|lower-alpha|lower-greek|lower-latin|lower-roman|lowercase|lr-tb|ltr|medium|middle|move|n-resize|ne-resize|newspaper|no-drop|no-repeat|nw-resize|none|normal|not-allowed|nowrap|oblique|optimize(Legibility|Quality|Speed)|outset|outside|overline|padding-box|pointer|pre(-(wrap|line))?|progress|relative|repeat-x|repeat-y|repeat|right|ridge|row-resize|rtl|s-resize|scroll|se-resize|separate|small-caps|solid|square|static|strict|sub|super|sw-resize|table-footer-group|table-header-group|tb-rl|text-bottom|text-top|text|thick|thin|top|transparent|underline|upper-alpha|upper-latin|upper-roman|uppercase|vertical(-(ideographic|text))?|visible(Painted|Fill|Stroke)?|w-resize|wait|whitespace|zero|smaller|larger|((xx?-)?(small|large))|painted|fill|stroke)\b</expression>
+      </zone>
+      <zone name="property-value.constant.other.color.rgb-value.stylus">
+        <expression>(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b</expression>
+      </zone>
+      <zone name="property-value.constant.numeric.stylus">
+        <expression>(-|\+)?\s*[0-9]+(\.[0-9]+)?</expression>
+      </zone>
+      <zone name="property-value.keyword.other.unit.stylus">
+        <expression>(?&lt;=[\d])(px|pt|cm|mm|in|em|ex|pc)\b|%</expression>
+      </zone>
+      <zone name="property-value.support.function.misc.stylus">
+      	<starts-with>
+      		<expression>(url|attr|counters?)\s*(\()</expression>
+      		<capture number="1" name="name"/>
+      		<capture number="2" name="punctuation.section.function.stylus"/>
+      	</starts-with>
+      	<ends-with>
+      		<expression>(\))</expression>
+      		<capture number="1" name="punctuation.section.function.stylus"/>
+      	</ends-with>
+      	<subzones>
+      		<include collection="string-single"/>
+      		<include collection="string-double"/>
+      		<zone name="constant.other.color.rgb-value.stylus">
+      			<expression>(\b0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*)(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*)(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\b)</expression>
+      		</zone>
+      		<zone name="constant.other.color.rgb-percentage.stylus">
+      			<expression>\b([0-9]{1,2}|100)\s*%,\s*([0-9]{1,2}|100)\s*%,\s*([0-9]{1,2}|100)\s*%</expression>
+      		</zone>
+      		<zone name="parameter.misc.stylus">
+      			<expression>[^'") \t]+</expression>
+      		</zone>
+      	</subzones>
+      </zone>
+      <zone name="property-value.support.function.color.stylus">
+      	<starts-with>
+      		<expression>(rgba?|hsla?)\s*(\()</expression>
+      		<capture number="1" name="name"/>
+      		<capture number="2" name="punctuation.section.function.stylus"/>
+      	</starts-with>
+      	<ends-with>
+      		<expression>(\))</expression>
+      		<capture number="1" name="punctuation.section.function.stylus"/>
+      	</ends-with>
+      	<subzones>
+      		<include collection="string-single"/>
+      		<include collection="string-double"/>
+      		<zone name="constant.other.color.rgba-value.stylus">
+      			<expression>(\b0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*)(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*)(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*(1(\.0)?|0?\.[0-9]+)\b)</expression>
+      		</zone>
+      		<zone name="constant.other.color.rgb-value.stylus">
+      			<expression>(\b0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*)(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\s*,\s*)(0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\b)</expression>
+      		</zone>
+      		<zone name="constant.other.color.rgb-percentage.stylus">
+      			<expression>\b([0-9]{1,2}|100)\s*%,\s*([0-9]{1,2}|100)\s*%,\s*([0-9]{1,2}|100)\s*%</expression>
+      		</zone>
+      		<zone name="parameter.misc.stylus">
+      			<expression>[^) \t]+</expression>
+      		</zone>
+      	</subzones>
+      </zone>
+      <zone name="property-value.constant.font">
+        <expression>(\b(?i:arial|century|comic|courier|garamond|georgia|helvetica|impact|lucida|symbol|system|tahoma|times|trebuchet|utopia|verdana|webdings|sans-serif|serif|monospace)\b)</expression>
+      </zone>
+    </collection>
+    <collection name="string.single">
+      <zone name="string.quoted.single">
+        <starts-with>
+          <expression>'</expression>
+        </starts-with>
+        <ends-with>
+          <expression>'</expression>
+        </ends-with>
+      </zone>
+    </collection>
+    <collection name="string.double">
+      <zone name="string.quoted.double">
+       <starts-with>
+         <expression>"</expression>
+       </starts-with>
+       <ends-with>
+         <expression>"</expression>
+       </ends-with>
+      </zone>
+    </collection>
+    <collection name="selector-miscellania">
+      <zone name="pseudo-classes">
+        <expression>(:+)\b(after|before|first-child|first-letter|first-line|selection|active|hover|link|visited|focus)\b</expression>
+      </zone>
+      <zone name="punctuation.comma">
+        <expression>,</expression>
+      </zone>
+    </collection>
+  </library>
+  
+</syntax>
