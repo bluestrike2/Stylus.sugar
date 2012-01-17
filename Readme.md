@@ -4,7 +4,7 @@ When you're ready to have awesome syntax highlighting for Stylus in Espresso, al
 
 ```bash
 cd ~/Library/Application\ Support/Espresso/Sugars
-git clone git://github.com/Bluestrike2/Bluestrike2-Stylus-Sugar.git
+git clone git://github.com/Bluestrike2/Bluestrike2-Stylus.sugar.git
 ```
 
 # Some Basics
@@ -19,12 +19,14 @@ I tried to get code folding support, but as of this release, have had no such lu
 // @end
 ```
 
-It's basically just a particularized comment, but I'm hoping that it'll at least offer some benefit to people out there when it comes to organization.
+It's basically just a particularized comment, but I'm hoping that it'll at least offer some benefit to people out there when it comes to organization until I can better wrangle 
 
 # Todo
 
+- Placeholder theme
 - Get Itemizers functioning smoothly (not included right now)
-- Add CodeSense Support
+- Add CodeSense Support for auto-completion, etc.
 - Clean up syntax zone naming as needed
+- Considering adding the ability to convert to .css but to be honest, you're better off just using [Codekit](http://incident57.com/codekit) if that's what you need. 
 
 If you're interested in making improvements to this sugar, feel free to do so and submit a pull request.
