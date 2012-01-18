@@ -1,0 +1,32 @@
+/*
+	@theme Stylus Placeholder
+	@placeholder stylus
+*/
+
+stylus {
+	spell-check: disabled;
+}
+
+selector.stylus, selector.stylus entity punctuation {
+	color: #3a77bf;
+}
+
+at.variable.stylus,
+stylus property-name {
+	color: #d4430d;
+}
+
+variable.stylus,
+variable.stylus parameter,
+stylus property-value {
+	color: #43a202;
+}
+
+stylus keyword.controls {
+	font-weight: bold;
+	color: #6700b9;
+}
+
+group-start.stylus name {
+  color: #616161;
+}
