@@ -4,7 +4,7 @@ When you're ready to have awesome syntax highlighting for Stylus in Espresso, al
 
 ```bash
 cd ~/Library/Application\ Support/Espresso/Sugars
-git clone git://github.com/Bluestrike2/Bluestrike2-Stylus.sugar.git
+git clone git://github.com/bluestrike2/Bluestrike2-Stylus.sugar.git
 ```
 
 # Some Basics
